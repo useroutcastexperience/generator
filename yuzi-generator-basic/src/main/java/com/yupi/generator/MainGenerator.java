@@ -10,18 +10,22 @@ public class MainGenerator {
     public static void main(String[] arges) throws IOException, TemplateException {
         MainTemplateConfig mainTemplateConfig = new MainTemplateConfig();
         mainTemplateConfig.setAuthor("yupi");
-        mainTemplateConfig.setLoop(false);
+        mainTemplateConfig.setLoop(true);
         mainTemplateConfig.setOutputText("求和结果：");
-        doGenerator(mainTemplateConfig);
+        doGenerate(mainTemplateConfig);
     }
-    public static void doGenerator(Object model) throws IOException, TemplateException {
+    public static void doGenerate(Object model) throws IOException, TemplateException {
         String projectPath = System.getProperty("user.dir");
-
-        String inputPath = new File(projectPath, "yuzi-generator-demo-projects/acm-template").getAbsolutePath();
-        String outputPath = projectPath + File.separator + "yuzi-generator-basic";
+        //整个项目的根路径
+        File file = new File(projectPath).getParentFile();
+        //输出路径
+        String inputPath = new File(file, "yuzi-generator.bat-demo-projects/acm-template").getAbsolutePath();
+        String outputPath = file.getAbsolutePath()+ File.separator + "yuzi-generator.bat-basic";
+        //生成静态文件
         StaticGenerator.copyFilesByHutool(inputPath,outputPath);
-        String inputDynamicPath = projectPath + File.separator + "yuzi-generator-basic/src/main/resources/templates/MainTemplate.java.ftl";
-        String outputDynamicPath = projectPath + File.separator + "yuzi-generator-basic/acm-template/src/com/yupi/acm/MainTemplate.java";
+        //生成动态文件
+        String inputDynamicPath = projectPath + File.separator + "src/main/resources/templates/MainTemplate.java.ftl";
+        String outputDynamicPath = projectPath + File.separator + "acm-template/src/com/yupi/acm/MainTemplate.java";
         DynamicGenerator.doGenerate(inputDynamicPath,outputDynamicPath,model);
     }
 }

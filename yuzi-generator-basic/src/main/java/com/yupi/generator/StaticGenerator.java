@@ -2,7 +2,7 @@ package com.yupi.generator;
 
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.ArrayUtil;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+
 
 import java.io.File;
 import java.io.IOException;
@@ -16,7 +16,7 @@ public class StaticGenerator {
         String projectPath = System.getProperty("user.dir");
         File projectFile = new File(projectPath);
         //输入路径
-        String inputPath = new File(projectFile,"yuzi-generator-demo-projects/acm-template").getAbsolutePath();
+        String inputPath = new File(projectFile,"yuzi-generator.bat-demo-projects/acm-template").getAbsolutePath();
         //输出路径
         String outputPath =projectPath;
         copyFilesByHutool(inputPath,outputPath);
